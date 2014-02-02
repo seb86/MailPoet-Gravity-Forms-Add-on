@@ -1,0 +1,94 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MailPoet Gravity Forms Add-on\n"
+"POT-Creation-Date: 2014-02-01 22:59+0100\n"
+"PO-Revision-Date: 2014-02-01 22:59+0100\n"
+"Last-Translator: Sebastien <sebastien@sebs-studio.com>\n"
+"Language-Team: Sebs Studio <sebastien@sebs-studio.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: mailpoet-gravity-forms-addon.php:85 mailpoet-gravity-forms-addon.php:97
+msgid "MailPoet Newsletter"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:110 mailpoet-gravity-forms-addon.php:124
+msgid "Yes, please subscribe me to your newsletter."
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:226
+msgid "Subscriber fields"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:230
+msgid "Use First Name from Field ID"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:236
+msgid "Use Last Name from Field ID"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:242
+msgid "Use Email Address from Field ID"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:249
+msgid "Enable multiselect"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:253
+msgid "No"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:254
+msgid "Yes"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:260
+msgid "MailPoet lists"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:278 mailpoet-gravity-forms-addon.php:289
+msgid "Single checkbox label"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:290
+msgid "This is ignored when multiselect is enabled."
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:291
+msgid "Default: Yes, please subscribe me to your newsletter."
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:292
+msgid "Custom Fields"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:293
+msgid ""
+"You need to tell MailPoet from which Gravity Forms Fields it should take the "
+"users name and email address from."
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:294
+msgid "Enable Multiselect"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:294
+msgid "Let the user select multiple lists."
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:295
+msgid "MailPoet Lists"
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:295
+msgid "Select which lists the user should be able to subscribe to."
+msgstr ""
