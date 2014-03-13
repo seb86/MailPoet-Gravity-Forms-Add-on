@@ -7,7 +7,7 @@
  * @author 		Sebs Studio
  * @category 	Core
  * @package 	MailPoet Gravity Forms Add-on/Functions
- * @version 	1.1.1
+ * @version 	2.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

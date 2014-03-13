@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MailPoet Gravity Forms Add-on\n"
-"POT-Creation-Date: 2014-03-13 18:13+0100\n"
-"PO-Revision-Date: 2014-03-13 18:13+0100\n"
+"POT-Creation-Date: 2014-03-13 19:30+0100\n"
+"PO-Revision-Date: 2014-03-13 19:30+0100\n"
 "Last-Translator: Sebastien <sebastien@ocean-themes.com>\n"
 "Language-Team: Sebs Studio <sebastien@sebs-studio.com>\n"
 "Language: en_US\n"
@@ -22,8 +22,8 @@ msgstr ""
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:41
 #, php-format
 msgid ""
-"Thank you for using %s :) Should you need help using or extending %s please "
-"read the documentation."
+"Thank you for using %s :) Should you need help using %s please read the "
+"documentation."
 msgstr ""
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:43
@@ -174,19 +174,27 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: mailpoet-gravity-forms-addon.php:277
+#: mailpoet-gravity-forms-addon.php:288
 #, php-format
 msgid "Sorry, <strong>%s</strong> requires WordPress "
 msgstr ""
 
-#: mailpoet-gravity-forms-addon.php:288
+#: mailpoet-gravity-forms-addon.php:299
 #, php-format
 msgid ""
 "Sorry, <strong>%s</strong> requires Gravity Forms. Activate it now or <a "
 "href=\"%s\" target=\"_blank\">purchase it today!</a>"
 msgstr ""
 
-#: mailpoet-gravity-forms-addon.php:299
+#: mailpoet-gravity-forms-addon.php:310
 #, php-format
 msgid "Sorry, <strong>%s</strong> requires Gravity Forms "
+msgstr ""
+
+#: mailpoet-gravity-forms-addon.php:321
+#, php-format
+msgid ""
+"Sorry, <strong>%s</strong> requires MailPoet Newsletters for this plugin to "
+"work. Please install and activate <strong><a href=\"%s\">MailPoet "
+"Newsletters</a></strong> first."
 msgstr ""

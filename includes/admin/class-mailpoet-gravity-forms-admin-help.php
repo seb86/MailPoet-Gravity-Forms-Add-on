@@ -38,7 +38,7 @@ class MailPoet_Gravity_Forms_Admin_Help {
 			'title'	=> __( 'Documentation', MAILPOET_GF_TEXT_DOMAIN ),
 			'content'	=>
 
-				'<p>' . sprintf( __( 'Thank you for using %s :) Should you need help using or extending %s please read the documentation.', MAILPOET_GF_TEXT_DOMAIN ), MAILPOET_GF, MAILPOET_GF ) . '</p>' .
+				'<p>' . sprintf( __( 'Thank you for using %s :) Should you need help using %s please read the documentation.', MAILPOET_GF_TEXT_DOMAIN ), MAILPOET_GF, MAILPOET_GF ) . '</p>' .
 
 				'<p><a href="' . MailPoet_Gravity_Forms_Add_on()->doc_url . '" class="button button-primary">' . sprintf( __( '%s Documentation', MAILPOET_GF_TEXT_DOMAIN ), MAILPOET_GF ) . '</a></p>'
 

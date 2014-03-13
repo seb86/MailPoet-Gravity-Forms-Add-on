@@ -264,6 +264,17 @@ final class MailPoet_Gravity_Forms_Add_on {
 			}
 		}
 
+		if( !is_plugin_active( 'gravityforms/gravityforms.php' ) && !is_plugin_active( 'wysija-newsletters/index.php' ) ) {
+			add_action('admin_notices', array( &$this, 'display_req_notice_mailpoet' ) );
+			add_action('admin_notices', array( &$this, 'display_req_gf_notice' ) );
+			return false;
+		}
+
+		if( !is_plugin_active( 'wysija-newsletters/index.php' ) ) {
+			add_action('admin_notices', array( &$this, 'display_req_notice_mailpoet' ) );
+			return false;
+		}
+
 		return true;
 	}
 
@@ -297,6 +308,17 @@ final class MailPoet_Gravity_Forms_Add_on {
 	static function display_req_gf_notice() {
 		echo '<div id="message" class="error"><p>';
 		echo sprintf( __('Sorry, <strong>%s</strong> requires Gravity Forms ' . MAILPOET_GF_VERSION_REQUIRE . ' or higher. Please update Gravity Forms for %s to work.', self::text_domain), MAILPOET_GF, MAILPOET_GF );
+		echo '</p></div>';
+	}
+
+	/**
+	 * Display the requirement notice for MailPoet.
+	 *
+	 * @access static
+	 */
+	static function display_req_notice_mailpoet() {
+		echo '<div id="message" class="error"><p>';
+		echo sprintf( __('Sorry, <strong>%s</strong> requires MailPoet Newsletters for this plugin to work. Please install and activate <strong><a href="%s">MailPoet Newsletters</a></strong> first.', 'mailpoet_bbpress_addon'), MAILPOET_GF, admin_url('plugin-install.php?tab=search&type=term&s=MailPoet+Newsletters+%28formerly+Wysija%29') );
 		echo '</p></div>';
 	}
 
