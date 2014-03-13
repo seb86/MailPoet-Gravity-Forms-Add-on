@@ -197,6 +197,7 @@ final class MailPoet_Gravity_Forms_Add_on {
 	 */
 	private function define_constants() {
 		define( 'MAILPOET_GF', self::name ); // Plugin Name
+		define( 'MAILPOET_GF_SLUG', self::slug ); // Plugin slug
 		define( 'MAILPOET_GF_FILE', __FILE__ ); // Plugin file name
 		define( 'MAILPOET_GF_VERSION', $this->version ); // Plugin version
 		define( 'MAILPOET_GF_WP_VERSION_REQUIRE', $this->wp_version_min ); // WordPress requires to be...

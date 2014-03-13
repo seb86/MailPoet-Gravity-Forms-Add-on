@@ -11,7 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Support logging
-add_filter('gform_logging_supported', array(&$this, 'set_logging_supported'));
+add_filter('gform_logging_supported', 'set_logging_supported');
 
 // Security check. If MailPoet is not active then none of these hooks are activated.
 if( !is_plugin_active( 'wysija-newsletters/index.php' ) )

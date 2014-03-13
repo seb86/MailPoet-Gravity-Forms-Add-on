@@ -50,7 +50,7 @@ function mailpoet_lists(){
  * Logs all activity.
  */
 function set_logging_supported($plugins) {
-	$plugins[self::slug] = "MailPoet";
+	$plugins[MAILPOET_GF_SLUG] = "MailPoet Gravity Forms Add-on";
 	return $plugins;
 }
 
@@ -60,7 +60,7 @@ function set_logging_supported($plugins) {
 function log_error($message) {
 	if( class_exists('GFLogging') ) {
 		GFLogging::include_logger();
-		GFLogging::log_message(self::slug, $message, KLogger::ERROR);
+		GFLogging::log_message(MAILPOET_GF_SLUG, $message, KLogger::ERROR);
 	}
 }
 
@@ -70,7 +70,7 @@ function log_error($message) {
 function log_debug($message){
 	if( class_exists('GFLogging') ) {
 		GFLogging::include_logger();
-		GFLogging::log_message(self::slug, $message, KLogger::DEBUG);
+		GFLogging::log_message(MAILPOET_GF_SLUG, $message, KLogger::DEBUG);
 	}
 }
 
