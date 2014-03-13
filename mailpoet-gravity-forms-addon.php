@@ -1,417 +1,414 @@
 <?php
 /*
-Plugin Name: MailPoet Gravity Forms Add-on
-Plugin URI: http://www.mailpoet.com
-Description: Adds a new field to add to your forms so your visitors can subscriber to your MailPoet newsletters.
-Version: 1.0.0
-Author: Sebs Studio
-Author URI: http://www.sebs-studio.com
-Author Email: sebastien@sebs-studio.com
-License:
+ * Plugin Name: MailPoet Gravity Forms Add-on
+ * Plugin URI: http://wordpress.org/plugins/mailpoet-gravity-forms-add-on
+ * Description: Adds a new field to add to your forms so your visitors can subscriber to your MailPoet newsletters.
+ * Version: 2.0.0
+ * Author: Sebs Studio
+ * Author URI: http://www.sebs-studio.com
+ * Author Email: sebastien@sebs-studio.com
+ * Requires at least: 3.7.1
+ * Tested up to: 3.8.1
+ *
+ * Text Domain: mailpoet-gravityforms-addon
+ * Domain Path: /languages/
+ * Network: false
+ *
+ * Copyright: (c) 2014 Sebs Studio. (sebastien@sebs-studio.com)
+ *
+ * License: GNU General Public License v3.0
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @package MailPoet_Gravity_Forms_Add_on
+ * @author Sebs Studio
+ * @category Core
+ */
 
-  Copyright 2014 Sebs Studio (sebastien@sebs-studio.com)
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License, version 2, as 
-  published by the Free Software Foundation.
+/**
+ * Main MailPoet Gravity Forms Add-on Class
+ *
+ * @class MailPoet_Gravity_Forms_Add_on
+ * @version 1.1.1
+ */
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+final class MailPoet_Gravity_Forms_Add_on {
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-  
-*/
-
-class MailPoet_Gravity_Forms_Add_on {
-
-	/*--------------------------------------------*
+	/**
 	 * Constants
-	 *--------------------------------------------*/
-	const name = 'MailPoet Gravity Forms Add-on';
+	 */
+
+	// Slug
 	const slug = 'mailpoet_gravity_forms_add_on';
 
-	private static $version = "1.0.0";
-	private static $min_gravityforms_version = "1.7.6.11";
+	// Name
+	const name = 'MailPoet Gravity Forms Add-on';
+
+	// Text Domain
+	const text_domain = 'mailpoet-gravityforms-addon';
+
+	/**
+	 * The Plug-in version.
+	 *
+	 * @var string
+	 */
+	public $version = "2.0.0";
+
+	/**
+	 * The WordPress version the plugin requires minimum.
+	 *
+	 * @var string
+	 */
+	public $wp_version_min = "3.7.1";
+
+	/**
+	 * The Gravity Forms version the plugin requires minimum.
+	 *
+	 * @var string
+	 */
+	public $gf_version_min = "1.7.6.11";
+
+	/**
+	 * The single instance of the class
+	 *
+	 * @var MailPoet Gravity Forms Add-on
+	 */
+	protected static $_instance = null;
+
+	/**
+	 * The Plug-in URL.
+	 *
+	 * @var string
+	 */
+	public $web_url = "http://www.mailpoet.com/";
+
+	/**
+	 * The Plug-in documentation URL.
+	 *
+	 * @var string
+	 */
+	public $doc_url = "https://github.com/seb86/MailPoet-Gravity-Forms-Add-on/wiki/";
+
+	/**
+	 * The WordPress Plug-in URL.
+	 *
+	 * @var string
+	 */
+	public $wp_plugin_url = "http://wordpress.org/plugins/mailpoet-gravity-forms-add-on";
+
+	/**
+	 * The WordPress Plug-in Support URL.
+	 *
+	 * @var string
+	 */
+	public $wp_plugin_support_url = "http://wordpress.org/support/plugin/mailpoet-gravity-forms-add-on";
+
+	/**
+	 * GitHub Username
+	 *
+	 * @var string
+	 */
+	public $github_username = "seb86";
+
+	/**
+	 * GitHub Repo URL
+	 *
+	 * @var string
+	 */
+	public $github_repo_url = "https://github.com/username/MailPoet-Gravity-Forms-Add-on/";
+
+	/**
+	 * The Plug-in manage options.
+	 *
+	 * @var string
+	 */
+	public $manage_plugin = "manage_options";
+
+	/**
+	 * Main MailPoet Gravity Forms Add-on Instance
+	 *
+	 * Ensures only one instance of this plugin is loaded or can be loaded.
+	 *
+	 * @access public static
+	 * @see MailPoet_Gravity_Forms_Add_on()
+	 * @return MailPoet Gravity Forms Add-on - Main instance
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
 
 	/**
 	 * Constructor
+	 *
+	 * @access public
+	 * return MailPoet_Gravity_Forms_Add_on
 	 */
-	function __construct(){
-		// Hook up to the init action
-		add_action('init', array(&$this, 'init_mailpoet_gravity_forms_add_on'));
+	public function __construct() {
+		// Auto-load classes on demand
+		if ( function_exists( "__autoload" ) ) {
+			spl_autoload_register( "__autoload" );
+		}
+
+		spl_autoload_register( array( &$this, 'autoload' ) );
+
+		// Define constants
+		$this->define_constants();
+
+		// Check plugin requirements
+		$this->check_requirements();
+
+		// Include required files
+		$this->includes();
+
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( &$this, 'action_links' ) );
+		add_action( 'init', array( &$this, 'init_mailpoet_gravity_forms_add_on' ) );
 	}
 
 	/**
-	 * Runs when the plugin is initialized
+	 * Auto-load MailPoet Gravity Forms Add-on classes on demand to reduce memory consumption.
+	 *
+	 * @param mixed $class
+	 * @return void
 	 */
-	function init_mailpoet_gravity_forms_add_on(){
-		if( is_admin() ) {
-			// Setup localization
-			load_plugin_textdomain(self::slug, false, dirname(plugin_basename(__FILE__)).'/languages');
+	public function autoload( $class ) {
 
-			// Support logging
-			add_filter('gform_logging_supported', array(&$this, 'set_logging_supported'));
+		$class = strtolower( $class );
 
-			if( !$this->is_gravityforms_supported() ) {
+		if ( strpos( $class, 'mailpoet_gravity_forms_' ) === 0 ) {
+
+			$path = $this->plugin_path() . '/includes/';
+			$file = 'class-' . str_replace( '_', '-', $class ) . '.php';
+
+			if ( is_readable( $path . $file ) ) {
+				include_once( $path . $file );
 				return;
 			}
-
-			add_filter('gform_add_field_buttons', array(&$this, 'mailpoet_add_field_button'));
-			add_filter('gform_field_type_title', array(&$this, 'mailpoet_assign_title'), 10, 2);
-			add_action('gform_editor_js', array(&$this, 'mailpoet_gform_editor_js'));
-			add_action('gform_field_standard_settings', array(&$this, 'mailpoet_settings'), 10, 2);
-			add_filter('gform_tooltips', array(&$this, 'add_mailpoet_tooltips'));
-			add_action('gform_field_css_class', array(&$this, 'mailpoet_gform_field_css_class'), 10, 3);
 		}
-		else{
-			add_action('gform_after_submission', array(&$this, 'mailpoet_gform_after_submission'), 10, 2);
-		}
-		add_action('gform_field_input', array(&$this, 'mailpoet_gform_field_input'), 10, 5);
 	}
 
 	/**
-	 * Adds MailPoet Newsletter button to 
-	 * Gravity Forms - Standard Fields.
+	 * Define Constants
+	 *
+	 * @access private
 	 */
-	function mailpoet_add_field_button($field_groups){
-		foreach($field_groups as &$group){
-			if($group['name'] == 'standard_fields'){
-				$group['fields'][] = array(
-										'class' => 'button',
-										'value' => __('MailPoet Newsletter', 'mailpoet-gravityforms-addon'),
-										'onclick' => "StartAddField('mailpoet');",
-				);
-				break;
-			}
-		}
-		return $field_groups;
+	private function define_constants() {
+		define( 'MAILPOET_GF', self::name ); // Plugin Name
+		define( 'MAILPOET_GF_FILE', __FILE__ ); // Plugin file name
+		define( 'MAILPOET_GF_VERSION', $this->version ); // Plugin version
+		define( 'MAILPOET_GF_WP_VERSION_REQUIRE', $this->wp_version_min ); // WordPress requires to be...
+		define( 'MAILPOET_GF_VERSION_REQUIRE', $this->gf_version_min ); // The plugin requires Gravit Forms to be at least...
+		define( 'MAILPOET_GF_PAGE', 'MailPoet' ); // Settings page slug
+		define( 'MAILPOET_GF_TEXT_DOMAIN', self::text_domain );
+
+		define( 'MAILPOET_GF_README_FILE', 'http://plugins.svn.wordpress.org/mailpoet-gravity-forms-add-on/trunk/readme.txt' );
+
+		define( 'MAILPOET_GF_GITHUB_USERNAME', $this->github_username );
+		define( 'MAILPOET_GF_GITHUB_REPO_URL' , str_replace( 'username', MAILPOET_GF_GITHUB_USERNAME, $this->github_repo_url ) );
+
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		define( 'MAILPOET_GF_SCRIPT_MODE', $suffix );
 	}
 
-	// Adds title to MailPoet Newsletter button
-	function mailpoet_assign_title($title, $field_type){
-		if($field_type == 'mailpoet'){
-			return __('MailPoet Newsletter', 'mailpoet-gravityforms-addon');
+	/**
+	 * Plugin action links.
+	 *
+	 * @access public
+	 * @param mixed $links
+	 * @param string $file plugin file path and name being processed
+	 * @return void
+	 */
+	public function action_links( $links ) {
+		// List your action links
+		if( current_user_can( $this->manage_plugin ) ) {
+			$plugin_links = array(
+				'<a href="' . admin_url( 'admin.php?page=gf_settings&subview=' . MAILPOET_GF_PAGE ) . '">' . __( 'Settings', MAILPOET_GF_TEXT_DOMAIN ) . '</a>',
+			);
 		}
+
+		return array_merge( $links, $plugin_links );
 	}
 
-	// Adds the input area to the external side
-	function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
-		if($field["type"] == "mailpoet"){
-			$field_id       = $field['id'];
-			$input_id       = 'mailpoet-'.$field['id'];
-			$input_name     = $form_id.'_'.$field['id'];
-			$tabindex       = GFCommon::get_tabindex();
-			$css            = isset($field['cssClass']) ? $field['cssClass'] : '';
-			$is_multiselect = isset($field['mailpoet_multiselect']) ? $field['mailpoet_multiselect'] : '';
-			$checkbox_label = isset($field['mailpoet_checkbox_label']) ? $field['mailpoet_checkbox_label'] : __('Yes, please subscribe me to your newsletter.', 'mailpoet-gravityforms-addon');
+	/**
+	 * Checks that the WordPress setup meets the plugin requirements.
+	 *
+	 * @access private
+	 * @global string $wp_version
+	 * @return boolean
+	 */
+	private function check_requirements() {
+		global $wp_version;
 
-			$mailpoet_lists = $this->mailpoet_lists();
+		require_once(ABSPATH.'/wp-admin/includes/plugin.php');
 
-			$html = "<div class='ginput_container'>";
+		if (!version_compare($wp_version, MAILPOET_GF_WP_VERSION_REQUIRE, '>=')) {
+			add_action('admin_notices', array( &$this, 'display_req_notice' ) );
+			return false;
+		}
 
-			$html .= "<ul class='gfield_checkbox' id='input_".$field_id."'>";
-
-			if($is_multiselect == 'no'){
-				$li_class 		= 'gchoice_'.$field_id;
-				$input_id 		= 'input_subscribe_me_mailpoet_lists';
-				$input_name 	= $input_id;
-				$input_value 	= '1';
-				if(empty($checkbox_label)){
-					$list_name 	= __('Yes, please subscribe me to your newsletter.', 'mailpoet-gravityforms-addon');
-				}
-				else{
-					$list_name 	= $checkbox_label;
-				}
-
-				$html .= "<li class='".$li_class."'><input id='".$input_id."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_id."'>".$list_name."</label></li>";
+		if( function_exists( 'is_plugin_active' ) ) {
+			if ( !is_plugin_active( 'gravityforms/gravityforms.php' ) ) {
+				add_action('admin_notices', array( &$this, 'display_req_gf_not_active_notice' ) );
+				return false;
 			}
 			else{
-				// If multi selection of Newsletters is enabled.
-				foreach($mailpoet_lists as $list){
-					$list_id   = $list['list_id'];
-					$list_name = $list['name'];
-
-					$input_id    = "input_mailpoet_lists_".$list_id;
-					$input_name  = $input_id;
-					$input_value = $list_id;
-					$li_class    = 'gchoice_'.$field_id.'_'.$list_id;
-
-					$html .= "<li class='".$li_class."'><input id='".$input_id."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."'";
-					if(isset($field[$input_name]) && $field[$input_name] == $list_id){ $html .= ' checked="checked"'; }
-					$html .= $tabindex." /><label for='".$input_id."'>".$list_name."</label></li>";
+				if( $this->is_gravityforms_installed() ) {
+					if( ! $this->is_gravityforms_supported() ) {
+						add_action('admin_notices', array( &$this, 'display_req_gf_notice' ) );
+						return false;
+					}
 				}
 			}
-
-			$html .= "</ul>";
-			$html .= "</div>";
-			$html = str_replace("\n", '', $html);
-
-			return $html;
-
 		}
 
-		return $input;
+		return true;
 	}
 
 	/**
-	 * Now we execute javascript for the 
-	 * field to load correctly.
+	 * Display the WordPress requirement notice.
+	 *
+	 * @access static
 	 */
-	function mailpoet_gform_editor_js(){
-	?>
-		<script type="text/javascript">
-			jQuery(document).ready(function($){
-				// Add all textarea settings to the "MailPoet Newsletter" field plus custom "mailpoet_setting"
-				// this will show all fields that Paragraph Text field shows plus my custom setting
-				// fieldSettings["mailpoet"] = fieldSettings["textarea"] + ", .mailpoet_setting"; 
-
-				// from forms.js; can add custom "mailpoet_setting" as well
-				// this will show all the fields of the Paragraph Text field minus a couple that I didn't want to appear.
-				fieldSettings["mailpoet"] = ".label_setting, .description_setting, .admin_label_setting, .css_class_setting, .visibility_setting, .mailpoet_setting";
-
-				// binding to the load field settings event to initialize the checkbox
-				jQuery(document).bind("gform_load_field_settings", function(event, field, form){
-					// handle multiselect option
-					if(field["mailpoet_multiselect"] == 'yes'){
-						jQuery("#mailpoet_multiselect option[value=yes]").attr('selected', 'selected');
-					}
-					else{
-						jQuery("#mailpoet_multiselect option[value=no]").attr('selected', 'selected');
-					}
-
-					// handle checkbox label
-					jQuery("#mailpoet_checkbox_label").val(field["mailpoet_checkbox_label"]);
-					// handle field id settings
-					jQuery("#mailpoet_email_field_id").val(field["mailpoet_email_field_id"]);
-					jQuery("#mailpoet_firstname_field_id").val(field["mailpoet_firstname_field_id"]);
-					jQuery("#mailpoet_lastname_field_id").val(field["mailpoet_lastname_field_id"]);
-
-					// handle lists selection
-					/*for(var key in field){
-						if(key.substr(0,20) == 'input_mailpoet_lists'){
-							jQuery("#"+key).attr("checked", field[key] == true);
-							console.log('value: ', field[key]);
-						}
-					}*/
-
-					jQuery.each(field, function(index, val){
-						if(index.substr(0,20) == 'input_mailpoet_lists'){
-							jQuery("#"+index).attr("checked", field[index] == true);
-							//console.log('value: ', field[index]);
-						}
-					});
-
-				});
-
-				jQuery("#mailpoet_checkbox_label").keyup(function(){
-					jQuery("label[for='input_subscribe_me_mailpoet_lists']").text(jQuery(this).val());
-				});
-
-			});
-		</script>
-		<?php
-	}
-
-	// Add a custom setting to the mailpoet properties
-	function mailpoet_settings($position, $form_id){
-		// Create settings on position 50 (right after Field Label)
-		if($position == 50){
-			$mailpoet_lists = $this->mailpoet_lists();
-			?>
-			<li class="mailpoet_setting field_setting">
-				<?php _e('Subscriber fields', 'mailpoet-gravityforms-addon'); ?>
-				<?php gform_tooltip("form_mailpoet_custom_fields"); ?>
-				<br>
-				<label for="mailpoet_firstname_field_id" class="inline">
-					<?php _e('Use First Name from Field ID', 'mailpoet-gravityforms-addon'); ?>
-				</label>
-				<input type="text" id="mailpoet_firstname_field_id" style="width:10%" onkeyup="SetFieldProperty('mailpoet_firstname_field_id', this.value);" />
-
-				<br>
-				<label for="mailpoet_lastname_field_id" class="inline">
-					<?php _e('Use Last Name from Field ID', 'mailpoet-gravityforms-addon'); ?>
-				</label>
-				<input type="text" id="mailpoet_lastname_field_id" style="width:10%" onkeyup="SetFieldProperty('mailpoet_lastname_field_id', this.value);" />
-
-				<br>
-				<label for="mailpoet_email_field_id" class="inline">
-					<?php _e('Use Email Address from Field ID', 'mailpoet-gravityforms-addon'); ?>
-				</label>
-				<input type="text" id="mailpoet_email_field_id" style="width:10%" onkeyup="SetFieldProperty('mailpoet_email_field_id', this.value);" />
-			</li>
-
-			<li class="mailpoet_setting field_setting">
-				<label for="mailpoet_multiselect" class="inline">
-					<?php _e('Enable multiselect', 'mailpoet-gravityforms-addon'); ?>
-					<?php gform_tooltip("form_mailpoet_multiselect"); ?>
-				</label>
-				<select id="mailpoet_multiselect" onchange="SetFieldProperty('mailpoet_multiselect', this.value);">
-					<option value="no"><?php _e('No', 'mailpoet-gravityforms-addon'); ?></option>
-					<option value="yes"><?php _e('Yes', 'mailpoet-gravityforms-addon'); ?></option>
-				</select>
-			</li>
-
-			<li class="mailpoet_setting field_setting mailpoet_lists">
-				<div id="gfield_settings_mailpoet_lists_container">
-					<?php _e('MailPoet lists', 'mailpoet-gravityforms-addon'); ?>
-					<?php gform_tooltip("form_mailpoet_lists"); ?>
-
-					<ul id="field_mailpoet_lists">
-					<?php foreach($mailpoet_lists as $list){ ?>
-						<li>
-							<input type="checkbox" id="input_mailpoet_lists_<?php echo $list['list_id']; ?>" onclick="SetFieldProperty('input_mailpoet_lists_<?php echo $list['list_id']; ?>', this.checked);" />
-							<label for="mailpoet_lists_<?php echo $list['list_id']; ?>" class="inline">
-								<?php echo $list['name']; ?>
-							</label>
-						</li>
-					<?php } ?>
-					</ul>
-				</div>
-			</li>
-
-			<li class="mailpoet_setting field_setting">
-				<label for="mailpoet_checkbox_label">
-					<?php _e('Single checkbox label', 'mailpoet-gravityforms-addon'); ?>
-					<?php gform_tooltip("form_mailpoet_checkbox_label"); ?>
-				</label>
-				<input type="text" id="mailpoet_checkbox_label" onkeyup="SetFieldProperty('mailpoet_checkbox_label', this.value);" class="fieldwidth-3" />
-			</li>
-			<?php
-		}
-	}
-
-	// Filter to add a new tooltip
-	function add_mailpoet_tooltips($tooltips){
-		$tooltips['form_mailpoet_checkbox_label'] = "<h6>".__('Single checkbox label', 'mailpoet-gravityforms-addon')."</h6>";
-		$tooltips['form_mailpoet_checkbox_label'] .= "<b>".__('This is ignored when multiselect is enabled.', 'mailpoet-gravityforms-addon')."</b>";
-		$tooltips['form_mailpoet_checkbox_label'] .= "<br>".__('Default: Yes, please subscribe me to your newsletter.', 'mailpoet-gravityforms-addon');
-		$tooltips['form_mailpoet_custom_fields'] = "<h6>".__('Custom Fields', 'mailpoet-gravityforms-addon')."</h6>";
-		$tooltips['form_mailpoet_custom_fields'] .= __('You need to tell MailPoet from which Gravity Forms Fields it should take the users name and email address from.', 'mailpoet-gravityforms-addon');
-		$tooltips['form_mailpoet_multiselect'] = "<h6>".__('Enable Multiselect', 'mailpoet-gravityforms-addon')."</h6>".__('Let the user select multiple lists.', 'mailpoet-gravityforms-addon');
-		$tooltips['form_mailpoet_lists'] = "<h6>".__('MailPoet Lists', 'mailpoet-gravityforms-addon')."</h6>".__('Select which lists the user should be able to subscribe to.', 'mailpoet-gravityforms-addon');
-
-		return $tooltips;
-	}
-
-	// Add a custom class to the field li
-	function mailpoet_gform_field_css_class($classes, $field, $form){
-		if($field['type'] == 'mailpoet'){
-			$classes .= ' gform_mailpoet';
-		}
-
-		return $classes;
-	}
-
-	// handle form submission
-	function mailpoet_gform_after_submission($entry, $form){
-
-		// Form ID
-		$form_id = $form['id'];
-
-		// find mailpoet form field
-		$mailpoet_form_field = $this->find_mailpoet_field_type('mailpoet', $form);
-		if(!$mailpoet_form_field) return;
-
-		$mailpoet_form_field_id = $mailpoet_form_field['id'];
-
-		// get form settings
-		$is_multiselect     = $mailpoet_form_field['mailpoet_multiselect'];
-		$email_field_id     = $mailpoet_form_field['mailpoet_email_field_id'];
-		$firstname_field_id = $mailpoet_form_field['mailpoet_firstname_field_id'];
-		$lastname_field_id  = $mailpoet_form_field['mailpoet_lastname_field_id'];
-
-		// If the user can select more than one newsletter lists.
-		if( isset($is_multiselect ) && $is_multiselect == 'yes' ) {
-			$mailpoet_lists = array();
-			foreach($_REQUEST as $key => $value){
-				if(preg_match('/input_mailpoet_lists_.*/', $key)){
-					$mailpoet_lists[] = $value;
-				}
-			}
-
-			// Check that the user has selected newsletters before subscribing.
-			if(sizeof($mailpoet_lists) == 0) return;
-		}
-		else{ // single select
-			// Check if user wants to subscribe.
-			if(isset($_REQUEST['input_subscribe_me_mailpoet_lists']) && $_REQUEST['input_subscribe_me_mailpoet_lists'] == '') return;
-
-			// Fetch list
-			$mailpoet_lists = array();
-			foreach($mailpoet_form_field as $key => $value){
-				if(preg_match('/input_mailpoet_lists_.*/', $key)){
-					$mailpoet_lists[] = $value;
-				}
-			}
-		}
-
-		// call mailpoet
-		$user_data = array( 
-			'email' 	=> $entry[$email_field_id],
-			'firstname' => $entry[$firstname_field_id],
-			'lastname' 	=> $entry[$lastname_field_id],
-		);
-
-		$data_subscriber = array(
-			'user' 		=> $user_data,
-			'user_list' => array('list_ids' => $mailpoet_lists)
-		);
-
-		$userHelper =&WYSIJA::get('user','helper');
-		$userHelper->addSubscriber($data_subscriber);
-	}
-
-	// find form field by given field id
-	public function find_mailpoet_field_ID($id, $form){
-		foreach($form['fields'] as $field){
-			if($field['id'] == $id) return $field;
-		}
-		return false;
-	}
-
-	// find form field by given field id
-	public function find_mailpoet_field_type($type, $form){
-		foreach($form['fields'] as $field){
-			if($field['type'] == $type) return $field;
-		}
-		return false;
+	static function display_req_notice() {
+		echo '<div id="message" class="error"><p>';
+		echo sprintf( __('Sorry, <strong>%s</strong> requires WordPress ' . MAILPOET_GF_WP_VERSION_REQUIRE . ' or higher. Please upgrade your WordPress setup', self::text_domain), MAILPOET_GF );
+		echo '</p></div>';
 	}
 
 	/**
-	 * Gets all MailPoet lists
+	 * Display the Gravity Forms requirement notice.
+	 *
+	 * @access static
+	 */
+	static function display_req_gf_not_active_notice() {
+		echo '<div id="message" class="error"><p>';
+		echo sprintf( __('Sorry, <strong>%s</strong> requires Gravity Forms. Activate it now or <a href="%s" target="_blank">purchase it today!</a>', self::text_domain), MAILPOET_GF, 'http://www.gravityforms.com' );
+		echo '</p></div>';
+	}
+
+	/**
+	 * Display the Gravity Forms requirement notice.
+	 *
+	 * @access static
+	 */
+	static function display_req_gf_notice() {
+		echo '<div id="message" class="error"><p>';
+		echo sprintf( __('Sorry, <strong>%s</strong> requires Gravity Forms ' . MAILPOET_GF_VERSION_REQUIRE . ' or higher. Please update Gravity Forms for %s to work.', self::text_domain), MAILPOET_GF, MAILPOET_GF );
+		echo '</p></div>';
+	}
+
+	/**
+	 * Include required core files used in admin and on the frontend.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function includes() {
+		include_once( 'includes/mailpoet-gravity-forms-core-functions.php' ); // Contains core functions for the front/back end.
+
+		if ( is_admin() ) {
+			$this->admin_includes();
+		}
+
+		if ( ! is_admin() || defined('DOING_AJAX') ) {
+			$this->frontend_includes();
+		}
+	}
+
+	/**
+	 * Include required admin files.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function admin_includes() {
+		include_once( 'includes/admin/class-mailpoet-gravity-forms-admin.php' ); // Admin section
+		include_once( 'includes/admin/mailpoet-gravity-forms-admin-hooks.php' ); // Hooks used in the admin
+	}
+
+	/**
+	 * Include required frontend files.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function frontend_includes() {
+		include_once( 'includes/mailpoet-gravity-forms-functions.php' ); // Contains functions for various front-end events
+		include_once( 'includes/mailpoet-gravity-forms-hooks.php' ); // Include hooks
+	}
+
+	/**
+	 * Runs when the plugin is initialized.
 	 *
 	 * @access public
 	 */
-	public function mailpoet_lists(){
-		// This will return an array of results with the name and list_id of each mailing list
-		$model_list = WYSIJA::get('list','model');
-		$mailpoet_lists = $model_list->get(array('name','list_id'), array('is_enabled' => 1));
+	public function init_mailpoet_gravity_forms_add_on(){
+		// Set up localisation
+		$this->load_plugin_textdomain();
 
-		return $mailpoet_lists;
+		// Load JavaScript and stylesheets
+		$this->register_scripts_and_styles();
+	}
+
+	/**
+	 * Load Localisation files.
+	 *
+	 * Note: the first-loaded translation file overrides any 
+	 * following ones if the same translation is present.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function load_plugin_textdomain() {
+		$locale = apply_filters( 'plugin_locale', get_locale(), self::text_domain );
+
+		load_textdomain( self::text_domain, WP_LANG_DIR . "/".self::slug."/" . $locale . ".mo" );
+
+		// Set Plugin Languages Directory
+		// Plugin translations can be filed in the mailpoet-gravity-forms-add-on/languages/ directory
+		// Wordpress translations can be filed in the wp-content/languages/ directory
+		load_plugin_textdomain( self::text_domain, false, dirname( plugin_basename( __FILE__ ) ) . "/languages" );
+	}
+
+	/** Helper functions ******************************************************/
+
+	/**
+	 * Get the plugin url.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function plugin_url() {
+		return untrailingslashit( plugins_url( '/', __FILE__ ) );
+	}
+
+	/**
+	 * Get the plugin path.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function plugin_path() {
+		return untrailingslashit( plugin_dir_path( __FILE__ ) );
 	}
 
 	/**
 	 * Checks if Gravity Forms is installed.
-	 *
-	 * @access private static
 	 */
-	private static function is_gravityforms_installed(){
-		return class_exists('RGForms');
+	function is_gravityforms_installed(){
+		return class_exists("RGForms");
 	}
 
 	/**
 	 * Checks if the currently active version of 
 	 * Gravity Forms supports this add-on.
-	 *
-	 * @access private static
 	 */
-	private static function is_gravityforms_supported(){
+	function is_gravityforms_supported(){
 		if(class_exists('GFCommon')){
-			$is_correct_version = version_compare(GFCommon::$version, self::$min_gravityforms_version, ">=");
+			$is_correct_version = version_compare(GFForms::$version, MAILPOET_GF_VERSION_REQUIRE, '>=' );
 			return $is_correct_version;
 		}
 		else{
@@ -419,39 +416,57 @@ class MailPoet_Gravity_Forms_Add_on {
 		}
 	}
 
-	// Returns the url of the plugin's root folder
-	protected function get_base_url(){
-		return plugins_url(null, __FILE__);
-	}
+	/**
+	 * Registers and enqueues stylesheets and javascripts 
+	 * for the administration panel and the front of the site.
+	 *
+	 * @access private
+	 */
+	private function register_scripts_and_styles() {
+		if ( is_admin() ) {
+			// Stylesheet
+			$this->load_file( self::slug . '-style', '/assets/css/admin/mailpoet-gravity-forms-addon.css' );
+		} // end if/else
+	} // end register_scripts_and_styles
 
-	// Returns the physical path of the plugin's root folder
-	protected function get_base_path(){
-		$folder = basename(dirname(__FILE__));
-		return WP_PLUGIN_DIR . "/" . $folder;
-	}
+	/**
+	 * Helper function for registering and enqueueing scripts and styles.
+	 *
+	 * @name	The 	ID to register with WordPress
+	 * @file_path		The path to the actual file
+	 * @is_script		Optional argument for if the incoming file_path is a JavaScript source file.
+	 *
+	 * @access private
+	 */
+	private function load_file( $name, $file_path, $is_script = false, $support = array(), $version = '' ) {
+		$url = $this->plugin_url() . $file_path;
+		$file = $this->plugin_path() . $file_path;
 
-	// Logs all activity.
-	function set_logging_supported($plugins) {
-		$plugins[self::slug] = "MailPoet";
-		return $plugins;
-	}
+		if( file_exists( $file ) ) {
+			if( $is_script ) {
+				wp_register_script( $name, $url, $support, $version );
+				wp_enqueue_script( $name );
+			}
+			else {
+				wp_register_style( $name, $url );
+				wp_enqueue_style( $name );
+			} // end if
+		} // end if
 
-	private static function log_error($message) {
-		if( class_exists('GFLogging') ) {
-			GFLogging::include_logger();
-			GFLogging::log_message(self::slug, $message, KLogger::ERROR);
-		}
-	}
-
-	private static function log_debug($message){
-		if( class_exists('GFLogging') ) {
-			GFLogging::include_logger();
-			GFLogging::log_message(self::slug, $message, KLogger::DEBUG);
-		}
-	}
+	} // end load_file
 
 } // end class
 
-$mailpoet_gravity_forms = new MailPoet_Gravity_Forms_Add_on();
+/**
+ * Returns the main instance of MailPoet_Gravity_Forms_Add_on to prevent the need to use globals.
+ *
+ * @return MailPoet Gravity Forms Add-on
+ */
+function MailPoet_Gravity_Forms_Add_on() {
+	return MailPoet_Gravity_Forms_Add_on::instance();
+}
+
+// Global for backwards compatibility.
+$GLOBALS['mailpoet_gravity_forms_add_on'] = MailPoet_Gravity_Forms_Add_on();
 
 ?>
