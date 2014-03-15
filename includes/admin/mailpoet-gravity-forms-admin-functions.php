@@ -93,8 +93,6 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 				$li_class    = 'gchoice_'.$field_id.'_'.$list_id;
 
 				// If the list was selected then display that list for the user to select.
-				if( isset( $field[$input_name] ) )
-					$html .= 'Hello';
 				if( isset( $field[$input_name] ) && $field[$input_name] == $list_id ) {
 					$html .= "<li class='".$li_class."'><input id='".$input_name."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_name."'>".$list_name."</label></li>";
 				}
@@ -109,17 +107,6 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 	}
 
 	return $input;
-}
-
-/**
- * Saves the multi-list selection if enabled.
- */
-function save_mailpoet_field_value($value, $lead, $field, $form){
-	if($field['mailpoet_multiselect'] == 'yes') {
-		if( isset( $field['mailpoet_gf_subscribe_list'] ) ) {
-			return array($value);
-		}
-	}
 }
 
 /**
@@ -234,7 +221,7 @@ function mailpoet_settings($position, $form_id){
 				<ul id="field_mailpoet_lists">
 				<?php foreach($mailpoet_lists as $list){ ?>
 					<li>
-						<input class="list_id_<?php echo $list['list_id']; ?>" type="checkbox" id="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" name="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" onclick="SetFieldProperty('mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>', this.checked);" />
+						<input class="list_id_<?php echo $list['list_id']; ?>" type="checkbox" id="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" name="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" value="<?php echo esc_attr($list['list_id']); ?>" onclick="SetFieldProperty('mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>', this.checked);" />
 						<label for="mailpoet_lists_<?php echo $list['list_id']; ?>" class="inline">
 							<?php echo $list['name']; ?>
 						</label>
