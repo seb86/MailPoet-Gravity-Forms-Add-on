@@ -47,68 +47,6 @@ function mailpoet_assign_title($title, $field_type){
 	}
 }
 
-// Adds the input area to the external side
-function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
-	if($field["type"] == "mailpoet"){
-		$field_id       = $field['id'];
-		$input_id       = 'mailpoet-'.$field['id'];
-		$input_name     = $form_id.'_'.$field['id'];
-		$tabindex       = GFCommon::get_tabindex();
-		$css            = isset($field['cssClass']) ? $field['cssClass'] : '';
-		$is_multiselect = isset($field['mailpoet_multiselect']) ? $field['mailpoet_multiselect'] : '';
-		$checkbox_label = isset($field['mailpoet_checkbox_label']) ? $field['mailpoet_checkbox_label'] : __('Yes, please subscribe me to your newsletter.', 'mailpoet-gravityforms-addon');
-
-		$mailpoet_lists = mailpoet_lists();
-
-		// If multiselect is enabled then fetch the selected lists for this form.
-		if( $is_multiselect == 'yes' ) 
-			$selected_form_lists = $field['mailpoet_gf_subscribe_list'];
-
-		$html = "<div class='ginput_container'>";
-
-		$html .= "<ul class='gfield_checkbox' id='input_".$field_id."'>";
-
-		if($is_multiselect == 'no'){
-			$li_class 		= 'gchoice_'.$field_id;
-			$input_id 		= 'input_subscribe_me_mailpoet_lists';
-			$input_name 	= $input_id;
-			$input_value 	= '1';
-			if(empty($checkbox_label)){
-				$list_name 	= __('Yes, please subscribe me to your newsletter.', 'mailpoet-gravityforms-addon');
-			}
-			else{
-				$list_name 	= $checkbox_label;
-			}
-
-			$html .= "<li class='".$li_class."'><input id='".$input_id."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_id."'>".$list_name."</label></li>";
-		}
-		else{
-			// If multi selection of Newsletters is enabled.
-			foreach($mailpoet_lists as $list){
-				$list_id   = $list['list_id'];
-				$list_name = $list['name'];
-
-				$input_name  = "mailpoet_gf_subscribe_list_".$list_id;
-				$input_value = $list_id;
-				$li_class    = 'gchoice_'.$field_id.'_'.$list_id;
-
-				// If the list was selected then display that list for the user to select.
-				if( isset( $field[$input_name] ) && $field[$input_name] == $list_id ) {
-					$html .= "<li class='".$li_class."'><input id='".$input_name."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_name."'>".$list_name."</label></li>";
-				}
-			}
-		}
-
-		$html .= "</ul>";
-		$html .= "</div>";
-		$html = str_replace("\n", '', $html);
-
-		return $html;
-	}
-
-	return $input;
-}
-
 /**
  * Now we execute javascript for the 
  * field to load correctly.

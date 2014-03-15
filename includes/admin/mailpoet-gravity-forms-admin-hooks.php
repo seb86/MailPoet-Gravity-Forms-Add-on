@@ -26,6 +26,5 @@ add_filter('gform_tooltips', 'add_mailpoet_tooltips'); // Provides help tooltips
 add_action('gform_editor_js', 'mailpoet_gform_editor_js'); // Applies JavaScript to the form
 add_action('gform_field_standard_settings', 'mailpoet_settings', 10, 2); // Assigns the new field under standard settings
 add_action('gform_field_css_class', 'mailpoet_gform_field_css_class', 10, 3); // Creates a css class for detection
-add_action('gform_field_input', 'mailpoet_gform_field_input', 10, 5);
 
 ?>
