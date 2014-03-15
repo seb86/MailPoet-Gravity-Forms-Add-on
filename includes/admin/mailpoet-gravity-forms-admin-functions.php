@@ -3,9 +3,9 @@
  * MailPoet Gravity Forms Add-on Admin Functions
  *
  * @author 		Sebs Studio
- * @category 	Core
- * @package 	MailPoet Gravity Forms Add-on/Admin/Functions
- * @version 	1.1.1
+ * @category 	Admin
+ * @package 	MailPoet Gravity Forms Add-on/Functions
+ * @version 	2.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -23,15 +23,15 @@ function mailpoet_gravity_forms_addon_get_screen_ids() {
 }
 
 /**
- * Adds MailPoet Newsletter button to 
- * Gravity Forms - Standard Fields.
+ * Adds MailPoet button to Gravity Forms
+ * @Standard Fields.
  */
 function mailpoet_add_field_button($field_groups){
 	foreach($field_groups as &$group){
 		if($group['name'] == 'standard_fields'){
 			$group['fields'][] = array(
 									'class' => 'button',
-									'value' => __('MailPoet Newsletter', 'mailpoet-gravityforms-addon'),
+									'value' => __('MailPoet', 'mailpoet-gravityforms-addon'),
 									'onclick' => "StartAddField('mailpoet');",
 			);
 			break;
@@ -60,6 +60,10 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 
 		$mailpoet_lists = mailpoet_lists();
 
+		// If multiselect is enabled then fetch the selected lists for this form.
+		if( $is_multiselect == 'yes' ) 
+			$selected_form_lists = $field['mailpoet_gf_subscribe_list'];
+
 		$html = "<div class='ginput_container'>";
 
 		$html .= "<ul class='gfield_checkbox' id='input_".$field_id."'>";
@@ -84,14 +88,16 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 				$list_id   = $list['list_id'];
 				$list_name = $list['name'];
 
-				$input_id    = "input_mailpoet_lists_".$list_id;
-				$input_name  = $input_id;
+				$input_name  = "mailpoet_gf_subscribe_list_".$list_id;
 				$input_value = $list_id;
 				$li_class    = 'gchoice_'.$field_id.'_'.$list_id;
 
-				$html .= "<li class='".$li_class."'><input id='".$input_id."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."'";
-				//if(isset($field[$input_name]) && $field[$input_name] == $list_id){ $html .= ' checked="checked"'; }
-				$html .= $tabindex." /><label for='".$input_id."'>".$list_name."</label></li>";
+				// If the list was selected then display that list for the user to select.
+				if( isset( $field[$input_name] ) )
+					$html .= 'Hello';
+				if( isset( $field[$input_name] ) && $field[$input_name] == $list_id ) {
+					$html .= "<li class='".$li_class."'><input id='".$input_name."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_name."'>".$list_name."</label></li>";
+				}
 			}
 		}
 
@@ -106,6 +112,17 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 }
 
 /**
+ * Saves the multi-list selection if enabled.
+ */
+function save_mailpoet_field_value($value, $lead, $field, $form){
+	if($field['mailpoet_multiselect'] == 'yes') {
+		if( isset( $field['mailpoet_gf_subscribe_list'] ) ) {
+			return array($value);
+		}
+	}
+}
+
+/**
  * Now we execute javascript for the 
  * field to load correctly.
  */
@@ -113,7 +130,7 @@ function mailpoet_gform_editor_js(){
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function($){
-		// Add all textarea settings to the "MailPoet Newsletter" field plus custom "mailpoet_setting"
+		// Add all textarea settings to the "MailPoet" field plus custom "mailpoet_setting"
 		// this will show all fields that Paragraph Text field shows plus my custom setting
 		// fieldSettings["mailpoet"] = fieldSettings["textarea"] + ", .mailpoet_setting"; 
 
@@ -126,40 +143,46 @@ function mailpoet_gform_editor_js(){
 			// handle multiselect option
 			if(field["mailpoet_multiselect"] == 'yes'){
 				jQuery("#mailpoet_multiselect option[value=yes]").attr('selected', 'selected');
+				jQuery(".mailpoet_setting.checkbox_label").hide();
+				jQuery(".mailpoet_setting.mailpoet_lists").show();
 			}
 			else{
 				jQuery("#mailpoet_multiselect option[value=no]").attr('selected', 'selected');
+				jQuery(".mailpoet_setting.checkbox_label").show();
+				jQuery(".mailpoet_setting.mailpoet_lists").hide();
 			}
 
 			// handle checkbox label
 			jQuery("#mailpoet_checkbox_label").val(field["mailpoet_checkbox_label"]);
 			// handle field id settings
-				jQuery("#mailpoet_email_field_id").val(field["mailpoet_email_field_id"]);
-				jQuery("#mailpoet_firstname_field_id").val(field["mailpoet_firstname_field_id"]);
-				jQuery("#mailpoet_lastname_field_id").val(field["mailpoet_lastname_field_id"]);
+			jQuery("#mailpoet_email_field_id").val(field["mailpoet_email_field_id"]);
+			jQuery("#mailpoet_firstname_field_id").val(field["mailpoet_firstname_field_id"]);
+			jQuery("#mailpoet_lastname_field_id").val(field["mailpoet_lastname_field_id"]);
 
-				// handle lists selection
-				/*for(var key in field){
-					if(key.substr(0,20) == 'input_mailpoet_lists'){
-						jQuery("#"+key).attr("checked", field[key] == true);
-						console.log('value: ', field[key]);
-					}
-				}*/
-
-				jQuery.each(field, function(index, val){
-					if(index.substr(0,20) == 'input_mailpoet_lists'){
-						jQuery("#"+index).attr("checked", field[index] == true);
-						//console.log('value: ', field[index]);
-					}
-				});
-
-			});
-
-			jQuery("#mailpoet_checkbox_label").keyup(function(){
-				jQuery("label[for='input_subscribe_me_mailpoet_lists']").text(jQuery(this).val());
+			// handle lists selection
+			jQuery.each(field, function(index, val){
+				if(index.substr(0,20) == 'mailpoet_gf_subscribe_list'){
+					jQuery("#"+index).attr("checked", field[index] == true);
+				}
 			});
 
 		});
+
+		jQuery("#mailpoet_checkbox_label").keyup(function(){
+			jQuery("label[for='input_subscribe_me_mailpoet_lists']").text(jQuery(this).val());
+		});
+
+		jQuery("#mailpoet_multiselect").change(function(){
+			if( jQuery(this).val() == 'yes' ){
+				jQuery(".mailpoet_setting.checkbox_label").hide();
+				jQuery(".mailpoet_setting.mailpoet_lists").show();
+			}
+			else{
+				jQuery(".mailpoet_setting.checkbox_label").show();
+				jQuery(".mailpoet_setting.mailpoet_lists").hide();
+			}
+		});
+	});
 	</script>
 	<?php
 }
@@ -211,7 +234,7 @@ function mailpoet_settings($position, $form_id){
 				<ul id="field_mailpoet_lists">
 				<?php foreach($mailpoet_lists as $list){ ?>
 					<li>
-						<input type="checkbox" id="input_mailpoet_lists_<?php echo $list['list_id']; ?>" onclick="SetFieldProperty('input_mailpoet_lists_<?php echo $list['list_id']; ?>', this.checked);" />
+						<input class="list_id_<?php echo $list['list_id']; ?>" type="checkbox" id="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" name="mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>" onclick="SetFieldProperty('mailpoet_gf_subscribe_list_<?php echo $list['list_id']; ?>', this.checked);" />
 						<label for="mailpoet_lists_<?php echo $list['list_id']; ?>" class="inline">
 							<?php echo $list['name']; ?>
 						</label>
@@ -221,7 +244,7 @@ function mailpoet_settings($position, $form_id){
 			</div>
 		</li>
 
-		<li class="mailpoet_setting field_setting">
+		<li class="mailpoet_setting field_setting checkbox_label">
 			<label for="mailpoet_checkbox_label">
 				<?php _e('Single checkbox label', 'mailpoet-gravityforms-addon'); ?>
 				<?php gform_tooltip("form_mailpoet_checkbox_label"); ?>
@@ -260,7 +283,7 @@ function mailpoet_gform_after_submission($entry, $form){
 	$form_id = $form['id'];
 
 	// find mailpoet form field
-	$mailpoet_form_field = $this->find_mailpoet_field_type('mailpoet', $form);
+	$mailpoet_form_field = find_mailpoet_field_type('mailpoet', $form);
 	if(!$mailpoet_form_field) return;
 
 	$mailpoet_form_field_id = $mailpoet_form_field['id'];

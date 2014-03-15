@@ -3,8 +3,8 @@
  * MailPoet Gravity Forms Add-on Admin Hooks
  *
  * @author 		Sebs Studio
- * @category 	Core
- * @package 	MailPoet Gravity Forms Add-on/Admin/Hooks
+ * @category 	Admin
+ * @package 	MailPoet Gravity Forms Add-on/Hooks
  * @version 	2.0.0
  */
 
