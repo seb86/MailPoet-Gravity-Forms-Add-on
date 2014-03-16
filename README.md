@@ -2,7 +2,7 @@
 
 Contributors: wysija, sebd86
 Tags: mailpoet, wysija, gravity forms, sebs studio, extension, add-on
-Requires at least: 3.5.1
+Requires at least: 3.7.1
 Tested up to: 3.8.1
 Stable tag: trunk
 License: GPLv2 or later
@@ -56,6 +56,17 @@ The manual installation method involves downloading my plugin and uploading it t
 
 ## Setting up the Plugin
 
+When you edit your form or your creating a new form, under "Standard Fields" select the MailPoet button. A new field will be added to your form. Now edit that field to setup.
+
+Fill in the required field id numbers for First Name, Last Name and Email address.
+
+If you wish to enable a multi-list selection then enable it and select the lists your users can then select.
+
+If you want just a simple single checkbox then make sure that you have selected the lists from the settings page under "Gravity Forms -> Settings -> MailPoet"
+
+Once you are happy with the settings, press "Save Form". If you haven't added the form to a post/page yet then insert the form to that post/page.
+
+That's it.
 
 ## Upgrading
 
@@ -63,7 +74,23 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 ## Screenshots
 
+ 1. Form with MailPoet field applied
+ 2. MailPoet settings under "Gravity Forms -> Settings"
+ 3. Form on post/page
+
 ## Changelog
+
+__2.0.0 - 16/03/2014__
+
+* IMPROVED - Code structure to help correct some of the core functions so it responds better.
+* IMPROVED - Javascript in form editor to identify if the field is enabling multi-list selection or not.
+* CORRECTED - Now the plugin checks if Gravity Forms is installed and activated first.
+* CORRECTED - Display of checkboxs, lists only the selected lists from the form editor if enabled multi-selection.
+* CORRECTED - When single checkbox is in use, it subscribes the users to the lists selected from the settings page.
+* CORRECTED - MailPoet field no longer stops the rest of the form from loading if MailPoet is not activated.
+* ADDED - Check if Gravity Forms is not the minimum version required, the user is asked to update it.
+* ADDED - Settings page under Gravity Forms to configure correctly the single checkbox option used in the form.
+* UPDATED - POT file.
 
 __1.0.0 - 02/02/2014__
 
