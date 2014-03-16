@@ -6,7 +6,7 @@
  *
  * @author 		Sebs Studio
  * @category 	Core
- * @package 	MailPoet Gravity Forms Add-on/Functions
+ * @package 	MailPoet Gravity Forms Add-on/Core Functions
  * @version 	2.0.0
  */
 
@@ -63,7 +63,7 @@ function mailpoet_gform_field_input($input, $field, $value, $lead_id, $form_id){
 				$li_class    = 'gchoice_'.$field_id.'_'.$list_id;
 
 				// If the list was selected then display that list.
-				if( isset( $field[$input_name] ) && $field[$input_name] == $list_id ) {
+				if( isset( $field[$input_name] ) && $field[$input_name] == true && substr($input_name, -1, 1) == $list_id ) {
 					$html .= "<li class='".$li_class."'><input id='".$input_name."' class='gform_mailpoet ".esc_attr($css)."' type='checkbox' name='".$input_name."' value='".$input_value."' ".$tabindex." /><label for='".$input_name."'>".$list_name."</label></li>";
 				}
 			}
