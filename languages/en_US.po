@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MailPoet Gravity Forms Add-on\n"
-"POT-Creation-Date: 2014-03-13 20:30+0100\n"
-"PO-Revision-Date: 2014-03-13 20:32+0100\n"
+"POT-Creation-Date: 2014-03-16 04:19+0100\n"
+"PO-Revision-Date: 2014-03-16 04:20+0100\n"
 "Last-Translator: Sebastien <sebastien@ocean-themes.com>\n"
 "Language-Team: Sebs Studio <sebastien@sebs-studio.com>\n"
 "Language: en_US\n"
@@ -76,83 +76,81 @@ msgid "Project on Github"
 msgstr ""
 
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:34
+msgid "MailPoet"
+msgstr ""
+
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:46
 msgid "MailPoet Newsletter"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:59
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:73
-msgid "Yes, please subscribe me to your newsletter."
-msgstr ""
-
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:174
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:123
 msgid "Subscriber fields"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:178
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:127
 msgid "Use First Name from Field ID"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:184
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:133
 msgid "Use Last Name from Field ID"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:190
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:139
 msgid "Use Email Address from Field ID"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:197
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:146
 msgid "Enable multiselect"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:201
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:150
 msgid "No"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:202
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:151
 msgid "Yes"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:208
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:157
 msgid "MailPoet lists"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:226
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:237
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:175
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:186
 msgid "Single checkbox label"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:238
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:187
 msgid "This is ignored when multiselect is enabled."
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:239
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:188
 msgid "Default: Yes, please subscribe me to your newsletter."
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:240
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:189
 msgid "Custom Fields"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:241
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:190
 msgid ""
 "You need to tell MailPoet from which Gravity Forms Fields it should take the "
 "users name and email address from."
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:242
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:191
 msgid "Enable Multiselect"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:242
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:191
 msgid "Let the user select multiple lists."
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:243
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:192
 msgid "MailPoet Lists"
 msgstr ""
 
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:243
+#: includes/admin/mailpoet-gravity-forms-admin-functions.php:192
 msgid "Select which lists the user should be able to subscribe to."
 msgstr ""
 
@@ -167,12 +165,22 @@ msgstr ""
 #: includes/admin/views/view-html-settings.php:39
 msgid ""
 "This setting is used only if you are using single checkbox option in the "
-"\"MailPoet Newsletter\" field settings. Simply select the lists you want "
-"your subscribers to subscribe to and press \"Save Settings\""
+"\"MailPoet\" field settings of the form editor."
+msgstr ""
+
+#: includes/admin/views/view-html-settings.php:40
+msgid ""
+"Simply select the lists you want your subscribers to subscribe to and press "
+"\"Save Settings\"."
 msgstr ""
 
 #: includes/admin/views/view-html-settings.php:63
 msgid "Save Settings"
+msgstr ""
+
+#: includes/mailpoet-gravity-forms-core-functions.php:32
+#: includes/mailpoet-gravity-forms-core-functions.php:47
+msgid "Yes, please subscribe me to your newsletter."
 msgstr ""
 
 #: mailpoet-gravity-forms-addon.php:229

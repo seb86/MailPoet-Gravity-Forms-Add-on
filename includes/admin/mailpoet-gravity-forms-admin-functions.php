@@ -40,10 +40,10 @@ function mailpoet_add_field_button($field_groups){
 	return $field_groups;
 }
 
-// Adds title to MailPoet Newsletter button
+// Adds title to MailPoet field
 function mailpoet_assign_title($title, $field_type){
 	if($field_type == 'mailpoet'){
-		return __('MailPoet Newsletter', 'mailpoet-gravityforms-addon');
+		return __('MailPoet', 'mailpoet-gravityforms-addon');
 	}
 }
 
@@ -55,12 +55,6 @@ function mailpoet_gform_editor_js(){
 ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function($){
-		// Add all textarea settings to the "MailPoet" field plus custom "mailpoet_setting"
-		// this will show all fields that Paragraph Text field shows plus my custom setting
-		// fieldSettings["mailpoet"] = fieldSettings["textarea"] + ", .mailpoet_setting"; 
-
-		// from forms.js; can add custom "mailpoet_setting" as well
-		// this will show all the fields of the Paragraph Text field minus a couple that I didn't want to appear.
 		fieldSettings["mailpoet"] = ".label_setting, .description_setting, .admin_label_setting, .css_class_setting, .visibility_setting, .mailpoet_setting";
 
 		// binding to the load field settings event to initialize the checkbox
@@ -94,10 +88,12 @@ function mailpoet_gform_editor_js(){
 
 		});
 
+		// Updates the single checkbox label when typing.
 		jQuery("#mailpoet_checkbox_label").keyup(function(){
 			jQuery("label[for='input_subscribe_me_mailpoet_lists']").text(jQuery(this).val());
 		});
 
+		// Changes between single or multiselect options.
 		jQuery("#mailpoet_multiselect").change(function(){
 			if( jQuery(this).val() == 'yes' ){
 				jQuery(".mailpoet_setting.checkbox_label").hide();

@@ -35,9 +35,9 @@ function settings_page(){
 	<form method="post" action="">
 		<?php wp_nonce_field("update", "gf_mailpoet_update"); ?>
 		<h3><?php _e('MailPoet Gravity Forms Add-on Settings', MAILPOET_GF_TEXT_DOMAIN); ?></h3>
-		<p>
-			<?php _e('This setting is used only if you are using single checkbox option in the "MailPoet Newsletter" field settings. Simply select the lists you want your subscribers to subscribe to and press "Save Settings"', MAILPOET_GF_TEXT_DOMAIN); ?>
-		</p>
+
+		<p><?php _e('This setting is used only if you are using single checkbox option in the "MailPoet" field settings of the form editor.', MAILPOET_GF_TEXT_DOMAIN); ?></p>
+		<p><?php _e('Simply select the lists you want your subscribers to subscribe to and press "Save Settings".', MAILPOET_GF_TEXT_DOMAIN); ?></p>
 
 		<table class="form-table">
 			<?php
