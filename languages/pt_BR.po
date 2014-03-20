@@ -1,27 +1,28 @@
+#
+# Translators:
+# rafaelfunchal <rafaelfunchal@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: MailPoet Gravity Forms Add-on v2.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-19 21:39+0100\n"
-"PO-Revision-Date: 2014-03-19 21:41+0100\n"
+"POT-Creation-Date: 2014-03-19 21:43+0100\n"
+"PO-Revision-Date: 2014-03-20 20:26+0100\n"
 "Last-Translator: Sebastien <sebastien@sebs-studio.com>\n"
-"Language-Team: MailPoet <funchal@mailpoet.com>\n"
-"Language: pt_BR\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
+"wysija/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ../\n"
-"X-Textdomain-Support: yes\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:38
 msgid "Documentation"
-msgstr ""
+msgstr "Documentação"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:41
 #, php-format
@@ -29,15 +30,17 @@ msgid ""
 "Thank you for using %s :) Should you need help using %s please read the "
 "documentation."
 msgstr ""
+"Obrigado por usar %s :) Precisa de ajuda ao usar %s? Por favor, leia nossa "
+"documentação."
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:43
 #, php-format
 msgid "%s Documentation"
-msgstr ""
+msgstr "Documentação do %s"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:49
 msgid "Support"
-msgstr ""
+msgstr "Suporte"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:52
 #, php-format
@@ -45,14 +48,16 @@ msgid ""
 "After <a href=\"%s\">reading the documentation</a>, for further assistance "
 "you can use the <a href=\"%s\">community forum</a>."
 msgstr ""
+"Após <a href=\"%s\">ler nossa documentação</a>, caso ainda precise de mais "
+"ajuda você pode acessar <a href=\"%s\">o fórum da comunidade</a>."
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:54
 msgid "Community Support"
-msgstr ""
+msgstr "Suporte da Comunidade"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:60
 msgid "Found a bug?"
-msgstr ""
+msgstr "Encontrou algum erro?"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:63
 #, php-format
@@ -62,91 +67,81 @@ msgid ""
 "\">contribution guide</a> prior to submitting your report. Be as descriptive "
 "as possible."
 msgstr ""
+"Caso você encontre um erro no <strong>%s</strong> você pode criar um ticket "
+"nos <a href=\"%s\">issues do Github</a>. Antes de enviar seu relatório, por "
+"favor, leia nosso <a href=\"%s\">guia de colaboração</a>. Lembre-se de ser o "
+"mais descritivo possível."
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:65
 msgid "Report a bug"
-msgstr ""
+msgstr "Relatar um erro"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:70
 msgid "For more information:"
-msgstr ""
+msgstr "Para mais informações:"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:72
 msgid "Project on WordPress.org"
-msgstr ""
+msgstr "Projeto no WordPress.org"
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:73
 msgid "Project on Github"
-msgstr ""
+msgstr "Projeto no Github"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:34
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:46
-#, fuzzy
 msgid "MailPoet"
-msgstr "Listas do MailPoet"
+msgstr "MailPoet"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:119
 msgid "Subscriber fields"
 msgstr "Campos do assinante"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:123
 msgid "Use First Name from Field ID"
 msgstr "Use o Nome do campo com ID"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:129
 msgid "Use Last Name from Field ID"
 msgstr "Use o Sobrenome do campo com ID"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:135
 msgid "Use Email Address from Field ID"
 msgstr "Use o Email do campo com ID"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:142
 msgid "Enable multiselect"
 msgstr "Habilitar múltiplas seleções"
 
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:146
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:147
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:153
 msgid "MailPoet lists"
 msgstr "Listas do MailPoet"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:171
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:182
 msgid "Single checkbox label"
 msgstr "Label do checkbox único"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:183
 msgid "This is ignored when multiselect is enabled."
-msgstr "Isso é ignorado quando múltiplas seleções está habilitada."
+msgstr "Isso é ignorado quando a opção múltiplas seleções está habilitada."
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:184
-#, fuzzy
 msgid "Default: Yes, please subscribe me to your newsletter."
 msgstr "Padrão: Sim, por favor me inscreva em sua newsletter."
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:185
 msgid "Custom Fields"
 msgstr "Campos personalizados"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:186
 msgid ""
 "You need to tell MailPoet from which Gravity Forms Fields it should take the "
@@ -155,51 +150,50 @@ msgstr ""
 "Você deve informar ao MailPoet de quais campos do Gravity Forms ele deve "
 "pegar o nome e email dos usuários."
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:187
 msgid "Enable Multiselect"
 msgstr "Habilitar múltipla seleção"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:187
 msgid "Let the user select multiple lists."
 msgstr "Permita que o usuário selecione várias listas."
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:188
 msgid "MailPoet Lists"
 msgstr "Listas do MailPoet"
 
-# @ mailpoet-gravityforms-addon
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:188
 msgid "Select which lists the user should be able to subscribe to."
 msgstr "Selecione quais as listas o usuário poderá se inscrever."
 
 #: includes/admin/views/view-html-settings.php:27
 msgid "Your settings have been saved."
-msgstr ""
+msgstr "Suas configurações foram salvas."
 
 #: includes/admin/views/view-html-settings.php:37
 msgid "MailPoet Gravity Forms Add-on Settings"
-msgstr ""
+msgstr "Configurações do MailPoet Gravity Forms Add-on"
 
 #: includes/admin/views/view-html-settings.php:39
 msgid ""
 "This setting is used only if you are using single checkbox option in the "
 "\"MailPoet\" field settings of the form editor."
 msgstr ""
+"Essa configuração é usada apenas se você tiver selecionado a opção de "
+"checkbox único nas configurações do campo do formulário do \"MailPoet\"."
 
 #: includes/admin/views/view-html-settings.php:40
 msgid ""
 "Simply select the lists you want your subscribers to subscribe to and press "
 "\"Save Settings\"."
 msgstr ""
+"Selecione as listas em que seus assinantes podem se inscrever e clique em "
+"\"Salvar Configurações\"."
 
 #: includes/admin/views/view-html-settings.php:63
 msgid "Save Settings"
-msgstr ""
+msgstr "Salvar Configurações"
 
-# @ mailpoet-gravityforms-addon
 #: includes/mailpoet-gravity-forms-core-functions.php:32
 #: includes/mailpoet-gravity-forms-core-functions.php:47
 msgid "Yes, please subscribe me to your newsletter."
@@ -207,12 +201,12 @@ msgstr "Sim, por favor me inscreva em sua newsletter."
 
 #: mailpoet-gravity-forms-addon.php:229
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 #: mailpoet-gravity-forms-addon.php:289
 #, php-format
 msgid "Sorry, <strong>%s</strong> requires WordPress "
-msgstr ""
+msgstr "Desculpe, <strong>%s</strong> depende do WordPress para funcionar."
 
 #: mailpoet-gravity-forms-addon.php:300
 #, php-format
@@ -220,11 +214,13 @@ msgid ""
 "Sorry, <strong>%s</strong> requires Gravity Forms. Activate it now or <a "
 "href=\"%s\" target=\"_blank\">purchase it today!</a>"
 msgstr ""
+"Desculpe, <strong>%s</strong> depende do Gravity Forms para funcionar. Ative-"
+"o agora ou <a href=\"%s\" target=\"_blank\">compre-o!</a>"
 
 #: mailpoet-gravity-forms-addon.php:311
 #, php-format
 msgid "Sorry, <strong>%s</strong> requires Gravity Forms "
-msgstr ""
+msgstr "Desculpe, <strong>%s</strong> depende do Gravity Forms para funcionar."
 
 #: mailpoet-gravity-forms-addon.php:322
 #, php-format
@@ -233,3 +229,6 @@ msgid ""
 "work. Please install and activate <strong><a href=\"%s\">MailPoet "
 "Newsletters</a></strong> first."
 msgstr ""
+"Desculpe, <strong>%s</strong> depende do plugin MailPoet Newsletters para "
+"funcionar. Por favor, instale e ative o <strong><a href=\"%s\">MailPoet "
+"Newsletters</a></strong> primeiramente."
