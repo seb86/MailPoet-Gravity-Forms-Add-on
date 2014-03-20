@@ -27,7 +27,7 @@ I'll acknowledge your contribution here with either your full name or username g
 
 ## Documentation
 
-For all documentation on this plugin go to: http://docs.sebs-studio.com/user-guide/extension/mailpoet-gravity-forms-add-on/
+For all documentation on this plugin go to: https://github.com/seb86/MailPoet-Gravity-Forms-Add-on/wiki
 
 ## Contributing
 
@@ -80,7 +80,7 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 ## Changelog
 
-__2.0.0 - 16/03/2014__
+__2.0.0 - 20/03/2014__
 
 * IMPROVED - Code structure to help correct some of the core functions so it responds better.
 * IMPROVED - Javascript in form editor to identify if the field is enabling multi-list selection or not.
@@ -90,6 +90,7 @@ __2.0.0 - 16/03/2014__
 * CORRECTED - MailPoet field no longer stops the rest of the form from loading if MailPoet is not activated.
 * ADDED - Check if Gravity Forms is not the minimum version required, the user is asked to update it.
 * ADDED - Settings page under Gravity Forms to configure correctly the single checkbox option used in the form.
+* ADDED - Portuguese (Brazil) language.
 * UPDATED - POT file.
 
 __1.0.0 - 02/02/2014__
