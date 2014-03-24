@@ -3,7 +3,7 @@
 Contributors: wysija, sebd86
 Tags: mailpoet, wysija, gravity forms, sebs studio, extension, add-on
 Requires at least: 3.7.1
-Tested up to: 3.8.1
+Tested up to: 3.9-beta2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -80,11 +80,18 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 ## Changelog
 
+__2.0.2 - 24/03/2014__
+
+* ADDED - Plugin Update Information - Now you can read what changes have been made on the plugins page when an update is available.
+* TESTED - WordPress 3.9 beta 2 and works.
+* UPDATED - POT file.
+
 __2.0.1 - 24/03/2014__
 
 * CORRECTED - Issue with screen id used for settings page, prevented from loading if in any other language but English.
 * CORRECTED - If function 'mailpoet_lists' is already defined, then don't load again.
 * REMOVED - Translation of the brand name 'MailPoet' only.
+* UPDATED - POT file.
 
 __2.0.0 - 20/03/2014__
 
