@@ -5,7 +5,7 @@
  * @author 		Sebs Studio
  * @category 	Admin
  * @package 	MailPoet Gravity Forms Add-on/Admin
- * @version 	2.0.0
+ * @version 	2.0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -43,21 +43,16 @@ class MailPoet_Gravity_Forms_Add_on_Admin {
 	 * Include admin files conditionally
 	 */
 	public function conditonal_includes() {
-		$screen = get_current_screen();
 
-		switch ( $screen->id ) {
+		// Creates a new Settings page on Gravity Forms settings screen
+		if( !is_plugin_active( 'wysija-newsletters/index.php' ) ) 
+			return false;
 
-			case 'forms_page_gf_settings' :
-				// Creates a new Settings page on Gravity Forms settings screen
-				if( !is_plugin_active( 'wysija-newsletters/index.php' ) ) 
-					return false;
+		if( RGForms::get("page") == "gf_settings") {
+			include('views/view-html-settings.php');
+			RGForms::add_settings_page( MAILPOET_GF_PAGE, 'settings_page' );
+		}
 
-				include('views/view-html-settings.php');
-				RGForms::add_settings_page( "MailPoet", "settings_page", NULL );
-
-				break;
-
-		} // end switch
 	}
 
 }

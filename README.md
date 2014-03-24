@@ -74,11 +74,17 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 ## Screenshots
 
- 1. Form with MailPoet field applied
- 2. MailPoet settings under "Gravity Forms -> Settings"
+ 1. MailPoet settings under "Gravity Forms -> Settings"
+ 2. Form with MailPoet field applied
  3. Form on post/page
 
 ## Changelog
+
+__2.0.1 - 24/03/2014__
+
+* CORRECTED - Issue with screen id used for settings page, prevented from loading if in any other language but English.
+* CORRECTED - If function 'mailpoet_lists' is already defined, then don't load again.
+* REMOVED - Translation of the brand name 'MailPoet' only.
 
 __2.0.0 - 20/03/2014__
 

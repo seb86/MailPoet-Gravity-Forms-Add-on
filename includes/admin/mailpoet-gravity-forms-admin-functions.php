@@ -5,7 +5,7 @@
  * @author 		Sebs Studio
  * @category 	Admin
  * @package 	MailPoet Gravity Forms Add-on/Functions
- * @version 	2.0.0
+ * @version 	2.0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -31,7 +31,7 @@ function mailpoet_add_field_button($field_groups){
 		if($group['name'] == 'standard_fields'){
 			$group['fields'][] = array(
 									'class' => 'button',
-									'value' => __('MailPoet', 'mailpoet-gravityforms-addon'),
+									'value' => 'MailPoet',
 									'onclick' => "StartAddField('mailpoet');",
 			);
 			break;
@@ -43,7 +43,7 @@ function mailpoet_add_field_button($field_groups){
 // Adds title to MailPoet field
 function mailpoet_assign_title($title, $field_type){
 	if($field_type == 'mailpoet'){
-		return __('MailPoet', 'mailpoet-gravityforms-addon');
+		return 'MailPoet';
 	}
 }
 
