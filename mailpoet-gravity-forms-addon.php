@@ -3,12 +3,12 @@
  * Plugin Name: MailPoet Gravity Forms Add-on
  * Plugin URI: http://wordpress.org/plugins/mailpoet-gravity-forms-add-on
  * Description: Adds a new field to add to your forms so your visitors can subscriber to your MailPoet newsletters.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Sebs Studio
  * Author URI: http://www.sebs-studio.com
  * Author Email: sebastien@sebs-studio.com
  * Requires at least: 3.7.1
- * Tested up to: 3.8.1
+ * Tested up to: 3.9-beta2
  *
  * Text Domain: mailpoet-gravityforms-addon
  * Domain Path: /languages/
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Main MailPoet Gravity Forms Add-on Class
  *
  * @class MailPoet_Gravity_Forms_Add_on
- * @version 2.0.1
+ * @version 2.0.2
  */
 
 final class MailPoet_Gravity_Forms_Add_on {
@@ -53,7 +53,7 @@ final class MailPoet_Gravity_Forms_Add_on {
 	 *
 	 * @var string
 	 */
-	public $version = "2.0.1";
+	public $version = "2.0.2";
 
 	/**
 	 * The WordPress version the plugin requires minimum.
@@ -349,6 +349,7 @@ final class MailPoet_Gravity_Forms_Add_on {
 	 */
 	public function admin_includes() {
 		include_once( 'includes/admin/class-mailpoet-gravity-forms-admin.php' ); // Admin section
+		include_once( 'includes/admin/class-mailpoet-gravity-forms-install.php' ); // Install plugin
 		include_once( 'includes/admin/mailpoet-gravity-forms-admin-hooks.php' ); // Hooks used in the admin
 	}
 
