@@ -84,6 +84,7 @@ __2.0.2 - 24/03/2014__
 
 * ADDED - Plugin Update Information - Now you can read what changes have been made on the plugins page when an update is available.
 * TESTED - WordPress 3.9 beta 2 and works.
+* UPDATED - POT file.
 
 __2.0.1 - 24/03/2014__
 
