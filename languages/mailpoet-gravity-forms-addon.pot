@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MailPoet Gravity Forms Add-on v2.0.0\n"
-"POT-Creation-Date: 2014-03-19 21:43+0100\n"
-"PO-Revision-Date: 2014-03-19 21:44+0100\n"
+"POT-Creation-Date: 2014-03-24 02:50+0100\n"
+"PO-Revision-Date: 2014-03-24 02:50+0100\n"
 "Last-Translator: Sebastien <sebastien@sebs-studio.com>\n"
 "Language-Team: Sebs Studio <sebastien@sebs-studio.com>\n"
 "Language: en_US\n"
@@ -73,11 +73,6 @@ msgstr ""
 
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:73
 msgid "Project on Github"
-msgstr ""
-
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:34
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:46
-msgid "MailPoet"
 msgstr ""
 
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:119

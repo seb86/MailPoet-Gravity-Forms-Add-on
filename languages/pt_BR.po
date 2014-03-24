@@ -4,15 +4,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MailPoet Gravity Forms Add-on v2.0.0\n"
-"POT-Creation-Date: 2014-03-19 21:43+0100\n"
-"PO-Revision-Date: 2014-03-20 20:26+0100\n"
+"POT-Creation-Date: 2014-03-24 02:50+0100\n"
+"PO-Revision-Date: 2014-03-24 02:50+0100\n"
 "Last-Translator: Sebastien <sebastien@sebs-studio.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "wysija/language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-Basepath: ../\n"
@@ -87,11 +87,6 @@ msgstr "Projeto no WordPress.org"
 #: includes/admin/class-mailpoet-gravity-forms-admin-help.php:73
 msgid "Project on Github"
 msgstr "Projeto no Github"
-
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:34
-#: includes/admin/mailpoet-gravity-forms-admin-functions.php:46
-msgid "MailPoet"
-msgstr "MailPoet"
 
 #: includes/admin/mailpoet-gravity-forms-admin-functions.php:119
 msgid "Subscriber fields"
@@ -232,3 +227,6 @@ msgstr ""
 "Desculpe, <strong>%s</strong> depende do plugin MailPoet Newsletters para "
 "funcionar. Por favor, instale e ative o <strong><a href=\"%s\">MailPoet "
 "Newsletters</a></strong> primeiramente."
+
+#~ msgid "MailPoet"
+#~ msgstr "MailPoet"
